@@ -8,8 +8,8 @@
         <result column="password" jdbcType="VARCHAR" property="password" />
         <result column="status" jdbcType="INTEGER" property="status" />
         <result column="type" jdbcType="INTEGER" property="type" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createdTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updatedTime" />
     </resultMap>
 
     <insert id="insertUser">
@@ -35,5 +35,11 @@
         SET password = #{newPassword}
         WHERE username = #{username}
     </update>
+
+    <select id="selectUserTypeById" resultType="java.lang.Integer">
+        SELECT type
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
 
 </mapper>

@@ -19,7 +19,7 @@
         <module>api</module>
         <module>user</module>
         <module>common</module>
-        <module>products</module>
+        <module>product</module>
         <module>order</module>
         <module>cart</module>
         <module>marketing</module>
@@ -81,6 +81,12 @@
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>3.0.5</version>
+        </dependency>
+
+        <dependency>
+          <groupId>com.github.pagehelper</groupId>
+          <artifactId>pagehelper-spring-boot-starter</artifactId>
+          <version>2.1.1</version>
         </dependency>
 
         <!-- 工具 -->

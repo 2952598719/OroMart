@@ -15,9 +15,6 @@ import top.orosirian.oromart.common.model.vo.UserVO;
 import top.orosirian.oromart.user.service.UserService;
 import top.orosirian.oromart.user.mappers.UserMapper;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -69,10 +66,11 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new BusinessException(ResultCode.USER_NOT_EXIST);
         }
-        return UserVO.builder()
-                .username(user.getUsername())
-                .createTime(LocalDateTime.ofInstant(user.getCreateTime(), ZoneId.systemDefault()))
-                .build();
+        return UserVO.of(user);
+    }
+
+    public Integer getUserType(Long userId) {
+        return userMapper.selectUserTypeById(userId);
     }
 
 }

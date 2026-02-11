@@ -18,4 +18,6 @@ public interface UserService {
 
     UserVO getProfile(String username);
 
+    Integer getUserType(Long userId);
+
 }

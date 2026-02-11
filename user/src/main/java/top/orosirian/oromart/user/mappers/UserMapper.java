@@ -14,4 +14,6 @@ public interface UserMapper {
 
     boolean updatePassword(String username, String newPassword);
 
+    int selectUserTypeById(Long userId);
+
 }

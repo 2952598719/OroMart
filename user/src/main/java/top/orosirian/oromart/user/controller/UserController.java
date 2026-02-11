@@ -7,7 +7,7 @@ import top.orosirian.oromart.common.enums.UserRole;
 import top.orosirian.oromart.common.model.dto.UserLoginDTO;
 import top.orosirian.oromart.common.model.dto.UserRegisterDTO;
 import top.orosirian.oromart.common.model.dto.UserResetPasswordDTO;
-import top.orosirian.oromart.common.model.vo.ResultVO;
+import top.orosirian.oromart.common.model.vo.ResponseVO;
 import top.orosirian.oromart.common.model.vo.UserVO;
 import top.orosirian.oromart.user.service.UserService;
 
@@ -18,37 +18,42 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/user/register")
-    public ResultVO<String> register(@Valid @RequestBody UserRegisterDTO dto) {
+    public ResponseVO<String> register(@Valid @RequestBody UserRegisterDTO dto) {
         userService.register(dto, UserRole.USER);
-        return ResultVO.success("注册成功");
+        return ResponseVO.success("注册成功");
     }
 
     @PostMapping("/user/register/admin")
-    public ResultVO<String> registerAdmin(@Valid @RequestBody UserRegisterDTO dto) {
-        userService.register(dto, UserRole.USER);
-        return ResultVO.success("注册成功");
+    public ResponseVO<String> registerAdmin(@Valid @RequestBody UserRegisterDTO dto) {
+        userService.register(dto, UserRole.ADMIN);
+        return ResponseVO.success("注册成功");
     }
 
     @PostMapping("/user/login")
-    public ResultVO<String> login(@Valid @RequestBody UserLoginDTO dto) {
-        return ResultVO.success(userService.login(dto));
+    public ResponseVO<String> login(@Valid @RequestBody UserLoginDTO dto) {
+        return ResponseVO.success(userService.login(dto));
     }
 
     @PostMapping("/user/logout")
-    public ResultVO<String> logout(@RequestParam String username) {
+    public ResponseVO<String> logout(@RequestParam String username) {
         userService.logout(username);
-        return ResultVO.success("登出成功");
+        return ResponseVO.success("登出成功");
     }
 
     @PutMapping("/user/resetPassword")
-    public ResultVO<String> resetPassword(@Valid @RequestBody UserResetPasswordDTO dto) {
+    public ResponseVO<String> resetPassword(@Valid @RequestBody UserResetPasswordDTO dto) {
         userService.resetPassword(dto);
-        return ResultVO.success("重设成功");
+        return ResponseVO.success("重设成功");
     }
 
     @GetMapping("/user/profile")
-    public ResultVO<UserVO> getProfile(@RequestParam String username) {
-        return ResultVO.success(userService.getProfile(username));
+    public ResponseVO<UserVO> getProfile(@RequestParam String username) {
+        return ResponseVO.success(userService.getProfile(username));
+    }
+
+    @GetMapping("/user/type")
+    public Integer getUserType(@RequestParam Long userId) {
+        return userService.getUserType(userId);
     }
 
 }

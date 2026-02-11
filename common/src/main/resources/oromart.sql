@@ -19,7 +19,7 @@ CREATE TABLE product (
     product_name VARCHAR(200) NOT NULL,
     price DECIMAL(10,2) NOT NULL,   -- 0.00 ~ 99999999.99
     stock INT NOT NULL DEFAULT 0,
-    status TINYINT DEFAULT 1,  -- 1:上架 0:下架
+    status TINYINT DEFAULT 1,  -- 0:下架 1:上架
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     -- 额外：图片-图床、商品介绍页面

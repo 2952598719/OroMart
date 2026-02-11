@@ -3,21 +3,20 @@ package top.orosirian.oromart.common.model.entity;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
 @Builder
-public class User {
+public class Product {
 
-    private Long userId;
+    private Long productId;
 
-    private String username;
+    private String productName;
 
-    private String password;
+    private BigDecimal price;
 
-    private Integer status;
-
-    private Integer type;
+    private Integer stock;
 
     private Instant createdTime;
 

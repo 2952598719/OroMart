@@ -6,28 +6,31 @@ import org.springframework.web.bind.annotation.*;
 import top.orosirian.oromart.common.model.dto.UserLoginDTO;
 import top.orosirian.oromart.common.model.dto.UserRegisterDTO;
 import top.orosirian.oromart.common.model.dto.UserResetPasswordDTO;
-import top.orosirian.oromart.common.model.vo.ResultVO;
+import top.orosirian.oromart.common.model.vo.ResponseVO;
 import top.orosirian.oromart.common.model.vo.UserVO;
 
 @FeignClient("user")
 public interface UserFeignClient {
 
     @PostMapping("/user/register")
-    ResultVO<String> register(@Valid @RequestBody UserRegisterDTO dto);
+    ResponseVO<String> register(@Valid @RequestBody UserRegisterDTO dto);
 
     @PostMapping("/user/register/admin")
-    ResultVO<String> registerAdmin(@Valid @RequestBody UserRegisterDTO dto);
+    ResponseVO<String> registerAdmin(@Valid @RequestBody UserRegisterDTO dto);
 
     @PostMapping("/user/login")
-    ResultVO<String> login(@Valid @RequestBody UserLoginDTO dto);
+    ResponseVO<String> login(@Valid @RequestBody UserLoginDTO dto);
 
     @PostMapping("/user/logout")
-    ResultVO<String> logout(@RequestParam String username);
+    ResponseVO<String> logout(@RequestParam String username);
 
     @PutMapping("/user/resetPassword")
-    ResultVO<String> resetPassword(@Valid @RequestBody UserResetPasswordDTO dto);
+    ResponseVO<String> resetPassword(@Valid @RequestBody UserResetPasswordDTO dto);
 
     @GetMapping("/user/profile")
-    ResultVO<UserVO> getProfile(@RequestParam String username);
+    ResponseVO<UserVO> getProfile(@RequestParam String username);
+
+    @GetMapping("/user/type")
+    Integer getUserType(@RequestParam Long userId);
 
 }
