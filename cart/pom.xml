@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gateway</artifactId>
+    <artifactId>cart</artifactId>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
@@ -18,14 +18,13 @@
     </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>top.orosirian</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-loadbalancer</artifactId>
-        </dependency>
+
     </dependencies>
 
 </project>

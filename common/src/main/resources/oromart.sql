@@ -7,8 +7,10 @@ CREATE TABLE user (
     user_id BIGINT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
-    created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    status TINYINT DEFAULT 1,   -- 0:禁用 1:正常 2:已注销
+    type TINYINT DEFAULT 1,     -- 0:管理员 1:普通用户
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS product;
@@ -18,8 +20,8 @@ CREATE TABLE product (
     price DECIMAL(10,2) NOT NULL,   -- 0.00 ~ 99999999.99
     stock INT NOT NULL DEFAULT 0,
     status TINYINT DEFAULT 1,  -- 1:上架 0:下架
-    created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     -- 额外：图片-图床、商品介绍页面
 );
 
@@ -32,8 +34,8 @@ CREATE TABLE `order` (  -- 和ORDER关键字重名，需要用反引号包围。
     pay_amount DECIMAL(10,2) NOT NULL,  -- 考虑满减、折扣
     status TINYINT DEFAULT 0,  -- 0:待支付 1:已支付
     coupon_id BIGINT,          -- 使用的优惠券，大部分平台都只允许一个订单用一张优惠券
-    created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    paid_time DATETIME
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    paid_time TIMESTAMP
 );
 
 DROP TABLE IF EXISTS order_product;
@@ -59,8 +61,8 @@ CREATE TABLE coupon_template (
     remaining_count bigint NOT NULL,
     used_count INT DEFAULT 0,
     status TINYINT DEFAULT 1,
-    created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS coupon;
@@ -70,9 +72,9 @@ CREATE TABLE coupon (
     template_id BIGINT NOT NULL,
     status TINYINT DEFAULT 0,  -- 0:未使用 1:已使用 2:已过期
     order_id BIGINT,           -- 使用的订单ID
-    received_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    expire_time DATETIME,
-    used_time DATETIME,
+    received_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expire_time TIMESTAMP,
+    used_time TIMESTAMP,
     INDEX idx_user_id(user_id),
     INDEX idx_status(status)
 );

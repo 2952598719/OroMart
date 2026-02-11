@@ -1,9 +1,9 @@
 server:
-  port: 8084
+  port: 8085
 
 spring:
   application:
-    name: order
+    name: cart
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/oromart?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
